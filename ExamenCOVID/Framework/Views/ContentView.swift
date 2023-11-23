@@ -12,11 +12,10 @@ struct ContentView: View {
     @State private var searchText: String = ""
 
     var body: some View {
-        VStack(spacing: 0) {
-            Text("Casos de COVID por país desde 2022")
+        VStack {
+            Text("Casos de COVID desde 2022")
                 .font(.headline)
-                .padding()
-
+            
             NavigationView {
                 List(contentViewModel.covidList, id: \.country) { res in
                     VStack(alignment: .leading) {
@@ -38,9 +37,9 @@ struct ContentView: View {
                 text: $searchText,
                 placement: .navigationBarDrawer(displayMode: .always),
                 prompt: "Buscar país")
-
+            
             .navigationTitle("COVID")
-
+            
             .onChange(of: searchText) { newValue in
                 // Cuando el texto de búsqueda cambia, llama a la función de búsqueda en el ViewModel
                 contentViewModel.searchCountry(with: newValue)

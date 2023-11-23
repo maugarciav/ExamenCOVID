@@ -8,9 +8,9 @@
 import Foundation
 
 
-
 class ContentViewModel : ObservableObject {
     @Published var covidList = [CovidData]()
+    private var originalcovidList = [CovidData]()
     
     private var covidListRequirement: CovidListRequirement
 
@@ -21,7 +21,20 @@ class ContentViewModel : ObservableObject {
     
     @MainActor
     func getCovidData () async {
-        covidList = await covidListRequirement.getCovidList() ?? []
-
+        originalcovidList = await covidListRequirement.getCovidList() ?? []
+        covidList = originalcovidList
     }
+    
+    func searchCountry(with searchText: String) {
+        if searchText.isEmpty{
+            covidList = originalcovidList
+        }else{
+        // Filtra la lista original de los paieses según el texto de búsqueda
+            covidList = originalcovidList.filter { CovidData in
+                return CovidData.country.lowercased().contains(searchText.lowercased())
+            }
+        }
+    }
+
+    
 }

@@ -27,8 +27,7 @@ class NetworkApiService {
                 switch response.result{
                 case .success(let data):
                     do {
-                        let countries = try JSONDecoder().decode([CovidData].self, from: data)
-                        return countries
+                        return try JSONDecoder().decode([CovidData].self, from: data)
                     } catch {
                         return nil
                     }

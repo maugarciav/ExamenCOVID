@@ -5,9 +5,6 @@
 //  Created by Mauricio Garcia Villanueva on 23/11/23.
 //
 
-
-
-
 import Foundation
 
 
@@ -23,11 +20,11 @@ protocol CovidAPIProtocol {
 
 
 class CovidRepository: CovidAPIProtocol {
-    
     let nservice: NetworkApiService
-    
     static let shared = CovidRepository()
 
+    
+    
     init(nservice: NetworkApiService = NetworkApiService.shared) {
         self.nservice = nservice
     }
